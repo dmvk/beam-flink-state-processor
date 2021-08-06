@@ -1,0 +1,30 @@
+plugins {
+  id 'java'
+  id 'com.diffplug.spotless' version '5.14.2'
+}
+
+repositories {
+  mavenCentral()
+}
+
+def beamVersion = '2.31.0'
+def flinkVersion = '1.13.2'
+def jupiterVersion = '5.7.2'
+
+dependencies {
+  implementation "org.apache.beam:beam-sdks-java-core:${beamVersion}"
+  implementation "org.apache.beam:beam-runners-flink-1.13:${beamVersion}"
+  implementation "org.apache.flink:flink-state-processor-api_2.11:${flinkVersion}"
+  testImplementation "org.junit.jupiter:junit-jupiter-api:${jupiterVersion}"
+  testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${jupiterVersion}"
+}
+
+spotless {
+  java {
+    googleJavaFormat('1.7')
+  }
+}
+
+test {
+  useJUnitPlatform()
+}
